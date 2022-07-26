@@ -7,6 +7,9 @@
         <Nullable>enable</Nullable>
         <AssemblyVersion>1.4.1</AssemblyVersion>
         <FileVersion>1.4.1</FileVersion>
+		<PublishSingleFile>true</PublishSingleFile>
+		<SelfContained>true</SelfContained>
+		<PublishReadyToRun>true</PublishReadyToRun>
     </PropertyGroup>
 
     <ItemGroup>
