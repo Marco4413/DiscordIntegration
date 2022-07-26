@@ -110,7 +110,10 @@ public class Bot
                     if (ulong.TryParse(command.Parameters[0].ToString(), out ulong chanId))
                     {
                         string[] split = command.Parameters[1].ToString()!.Split("|");
-                        await Guild.GetTextChannel(chanId).SendMessageAsync(embed: await EmbedBuilderService.CreateBasicEmbed(ServerNumber + split[0].TrimEnd('|'), split[1].TrimStart('|'), (bool)command.Parameters[2] ? Color.Green : Color.Red));
+                        var title = ServerNumber + split[0].TrimEnd('|');
+                        var msg = split[1].TrimStart('|');
+                        var color = (bool)command.Parameters[2] ? ":green_circle:" : ":red_circle:";
+                        await Guild.GetTextChannel(chanId).SendMessageAsync($"{color} [{title}] {msg}");
                     }
 
                     break;
@@ -180,11 +183,11 @@ public class Bot
                             i++;
                         }
 
-                        _ = Guild.GetTextChannel(message.Key).SendMessageAsync(embed: await EmbedBuilderService.CreateBasicEmbed($"Server {ServerNumber} Logs", msg, Color.Green));
+                        _ = Guild.GetTextChannel(message.Key).SendMessageAsync($":green_circle: [{ServerNumber}]: {msg}");
                         messages.Add(message.Key, message.Value.Replace(msg, string.Empty));
                     }
                     else
-                        _ = Guild.GetTextChannel(message.Key).SendMessageAsync(embed: await EmbedBuilderService.CreateBasicEmbed($"Server {ServerNumber} Logs", message.Value, Color.Green));
+                        _ = Guild.GetTextChannel(message.Key).SendMessageAsync($":green_circle: [{ServerNumber}]: {message.Value}");
                 }
                 catch (Exception e)
                 {
